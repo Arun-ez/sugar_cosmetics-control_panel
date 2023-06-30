@@ -3,3 +3,13 @@ body {
     background-color: #1A202C !important;
     color: white !important;
 }
+
+::-webkit-scrollbar {
+    width: 0.7rem;
+    background-color: aliceblue;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #21395a;
+    transition: all 0.5s ease-in-out;
+}

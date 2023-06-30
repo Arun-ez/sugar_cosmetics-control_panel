@@ -54,12 +54,7 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
         { label: 'New Launches', value: 'new' },
     ]
 
-    const post_data = () => {
-
-    }
-
-    const update_data = async () => {
-
+    const process_input_data = () => {
         const {
             title,
             desc,
@@ -88,6 +83,20 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
             images: [image_1.value, image_2.value, image_3.value, image_4.value, image_5.value]
         }
 
+        return data;
+    }
+
+    const post_data = () => {
+
+        const data = process_input_data();
+
+        console.log(data)
+    }
+
+    const update_data = async () => {
+
+        const data = process_input_data();
+
         set_loading(true);
 
         let response = await Axios.patch(`/products/${_id}`, data);
@@ -107,14 +116,14 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
                 <DrawerCloseButton />
                 <DrawerHeader>{type === 'update' ? title : 'Add New Product'}</DrawerHeader>
                 <DrawerBody >
-                    <Flex gap={10}>
+                    <Flex direction={'column'} gap={10}>
 
                         {(type === 'update') && (
-                            <SimpleGrid columns={2} gap={4}>
+                            <SimpleGrid columns={5} gap={4} placeItems={'center'}>
                                 {images.map((src, idx) => {
 
                                     return (
-                                        <Image src={src} w={'200px'} h={'210px'} key={idx} />
+                                        <Image src={src} key={idx} />
                                     )
 
                                 })}
@@ -125,7 +134,7 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
                         <Box w={'100%'} >
                             <form w={'100%'} ref={input_parent_ref}  >
                                 <Box w={'100%'} >
-                                    <SimpleGrid columns={[1, 2, 2, 3]} gap={4} w={'100%'}>
+                                    <SimpleGrid columns={[1, 1, 2, 3]} gap={4} w={'100%'}>
 
 
                                         <Box>
@@ -238,7 +247,7 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
                                     <Text fontWeight={'medium'} mb={1} fontSize={22} pl={1} letterSpacing={1} mt={10} > Image Sources </Text>
 
-                                    <SimpleGrid mt={2} columns={[1, 2, 2, 3]} gap={4} w={'100%'}>
+                                    <SimpleGrid mt={2} columns={[1, 1, 2, 3]} gap={4} w={'100%'}>
 
                                         {images.map((src, idx) => {
                                             return (
@@ -266,8 +275,8 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
                     </Flex>
 
-                    <DrawerFooter>
-                        <HStack gap={4} mt={10}>
+                    <DrawerFooter justifyContent={'center'} >
+                        <HStack gap={4} mt={10} >
 
                             {type === 'update' && (
                                 <Button w={200} bg={'gray.600'} color={'white'} _hover={'none'}>
