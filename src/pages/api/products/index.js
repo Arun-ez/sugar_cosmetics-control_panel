@@ -1,3 +1,4 @@
+import { isAuthrize } from "@/middlewares/Authorizer";
 import { connect } from "@/configs/mongodb.comfig";
 import { Product } from "@/models/Product.model";
 
@@ -30,6 +31,10 @@ const post = async (req, res) => {
 const handler = async (req, res) => {
 
     const { method } = req;
+
+    if (!isAuthrize(req)) {
+        return res.status(401).send({ error: 'Unauthorized' });
+    }
 
     if (method !== 'GET' && method !== 'POST') {
         return res.status(404).send({ error: `${method} not supported` });

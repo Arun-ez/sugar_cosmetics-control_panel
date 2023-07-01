@@ -3,8 +3,9 @@ import { Box, Heading, Table, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 import { TableNavigator } from "@/components/TableNavigator";
 import { ProductRow } from "@/components/ProductRow";
 import { Axios } from "@/configs/axios.config";
+import { toast } from "react-hot-toast";
 
-const home = () => {
+const home = ({ token }) => {
 
   const [products, set_products] = useState([]);
   const [total_items, set_total_items] = useState(0);
@@ -33,7 +34,7 @@ const home = () => {
 
     if (!query) return;
 
-    const { data: { data, total_pages, count } } = await Axios.get(`/products/search?q=${query}&limit=10&page=${page}`);
+    const { data: { data, total_pages, count } } = await Axios.get(`/products/search?q=${query}&limit=10&page=${page}&token=${token}`);
     set_products(data);
     set_total_items(count);
     set_total_pages(total_pages);
@@ -46,11 +47,17 @@ const home = () => {
       return;
     }
 
-    const { data: { data, total_pages, count } } = await Axios.get(`/products?limit=10&page=${page}&category=${selected}`);
+    try {
+      const { data: { data, total_pages, count } } = await Axios.get(`/products?limit=10&page=${page}&category=${selected}&token=${token}`);
 
-    set_products(data);
-    set_total_items(count);
-    set_total_pages(total_pages);
+      set_products(data);
+      set_total_items(count);
+      set_total_pages(total_pages);
+    } catch (error) {
+
+    }
+
+
   }
 
   useEffect(() => {
@@ -78,6 +85,7 @@ const home = () => {
         items={total_items}
         search={search}
         load={load}
+        token={token}
       />
 
       <Table mt={5} variant={'simple'}>
@@ -98,7 +106,7 @@ const home = () => {
         <Tbody>
           {products.map((product, idx) => {
             return (
-              <ProductRow data={product} load={load} key={idx} />
+              <ProductRow data={product} load={load} key={idx} token={token} />
             )
           })}
         </Tbody>

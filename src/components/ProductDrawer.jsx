@@ -23,7 +23,7 @@ import Link from 'next/link';
 import { Axios } from '@/configs/axios.config';
 import { toast } from 'react-hot-toast';
 
-const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
+const ProductDrawer = ({ isOpen, onClose, data, load, type, token }) => {
 
     const input_parent_ref = useRef(null);
 
@@ -125,15 +125,24 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
             return;
         }
 
-        let response = await Axios.post('/products', data)
+        set_loading(true);
 
-        if (response.status === 200) {
-            load();
-            onClose();
-            toast.success('Product Added');
-        } else {
-            toast.error('Some error occured');
+        try {
+            let response = await Axios.post(`/products?token=${token}`, data)
+
+            set_loading(false);
+
+            if (response.status === 200) {
+                load();
+                onClose();
+                toast.success('Product Added');
+            } else {
+                toast.error('Some error occured');
+            }
+        } catch (error) {
+            set_loading(false);
         }
+
     }
 
     const update_data = async () => {
@@ -147,16 +156,20 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
         set_loading(true);
 
-        let response = await Axios.patch(`/products/${_id}`, data);
+        try {
+            let response = await Axios.patch(`/products/${_id}?token=${token}`, data);
 
-        set_loading(false);
+            set_loading(false);
 
-        if (response.status === 200) {
-            load();
-            onClose();
-            toast.success('Updated Successfully');
-        } else {
-            toast.error('Some error occured');
+            if (response.status === 200) {
+                load();
+                onClose();
+                toast.success('Updated Successfully');
+            } else {
+                toast.error('Some error occured');
+            }
+        } catch (error) {
+            set_loading(false);
         }
     }
 

@@ -1,4 +1,4 @@
-
+'use client';
 import axios from "axios";
 
 const Axios = axios.create({
@@ -7,6 +7,5 @@ const Axios = axios.create({
         'Content-Type': 'application/json'
     }
 })
-
 
 export { Axios }

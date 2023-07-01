@@ -1,8 +1,13 @@
-import { Flex, Input, Select, Text, Button, useDisclosure } from '@chakra-ui/react'
-import { PiCaretLeftThin, PiCaretRightThin } from 'react-icons/pi';
-import { ProductDrawer } from './ProductDrawer';
 
-const TableNavigator = ({ page, set_page, total_pages, selections, selected, set_selected, query, set_query, items, search, load }) => {
+import { RiRefreshLine } from 'react-icons/ri';
+import { PiCaretLeftThin, PiCaretRightThin } from 'react-icons/pi';
+
+import { ProductDrawer } from './ProductDrawer';
+import { Flex, Input, Select, Text, Button, useDisclosure } from '@chakra-ui/react'
+
+
+
+const TableNavigator = ({ page, set_page, total_pages, selections, selected, set_selected, query, set_query, items, search, load, token }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -115,7 +120,8 @@ const TableNavigator = ({ page, set_page, total_pages, selections, selected, set
                 </Flex>
 
                 <Button w={140} bg={'gray.600'} color={'white'} _hover={'none'} onClick={onOpen} > Add Product </Button>
-                <ProductDrawer isOpen={isOpen} onClose={onClose} load={load} type='post' />
+                <RiRefreshLine fontSize={25} cursor={'pointer'} onClick={load} />
+                <ProductDrawer isOpen={isOpen} onClose={onClose} load={load} type='post' token={token} />
             </Flex>
 
 

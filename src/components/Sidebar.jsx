@@ -1,8 +1,12 @@
-import { Flex, Text, VStack, Image } from '@chakra-ui/react'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-const Sidebar = () => {
+import { CiLogout } from 'react-icons/ci';
+import { FiUserCheck } from 'react-icons/fi';
+import { Flex, Text, VStack, Image } from '@chakra-ui/react';
+
+
+const Sidebar = ({ admin, onLogout }) => {
 
     const router = useRouter();
 
@@ -54,6 +58,41 @@ const Sidebar = () => {
                     )
                 })}
 
+            </VStack>
+
+            <VStack>
+                <Text
+                    px={4}
+                    py={2}
+                    gap={2}
+                    display={'flex'}
+                    alignItems={'center'}
+                    borderRadius={12}
+                    w={'100%'}
+
+                    fontWeight={'medium'}
+                    fontSize={18}
+                >
+                    <FiUserCheck />
+                    {admin}
+                </Text>
+
+                <Text
+                    px={4}
+                    py={2}
+                    gap={2}
+                    cursor={'pointer'}
+                    display={'flex'}
+                    alignItems={'center'}
+                    borderRadius={12}
+                    w={'100%'}
+                    fontWeight={'medium'}
+                    fontSize={18}
+                    onClick={onLogout}
+                >
+                    <CiLogout />
+                    Logout
+                </Text>
             </VStack>
 
         </Flex>
