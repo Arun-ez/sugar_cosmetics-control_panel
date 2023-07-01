@@ -107,7 +107,7 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
             } else {
 
-                if (!value) {
+                if (!value && value !== 0) {
                     return null;
                 }
             }
