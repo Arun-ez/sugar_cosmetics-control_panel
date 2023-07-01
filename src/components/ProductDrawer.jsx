@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { Axios } from '@/configs/axios.config';
+import { toast } from 'react-hot-toast';
 
 const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
@@ -28,7 +29,7 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
     const [loading, set_loading] = useState(false);
 
-    const { _id, title, images, description, price, category, filter, inventory, discount, source } = data || {
+    const { _id, title, images, description, price, category, filter, inventory, discount, source, benifits, offers } = data || {
         _id: null,
         title: '',
         images: ['', '', '', '', ''],
@@ -38,7 +39,9 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
         filter: '',
         inventory: '',
         discount: '',
-        source: ''
+        source: '',
+        benifits: ['', '', ''],
+        offers: ['', '']
     };
 
     const selections = [
@@ -68,7 +71,12 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
             image_2,
             image_3,
             image_4,
-            image_5
+            image_5,
+            benifit_1,
+            benifit_2,
+            benifit_3,
+            offer_1,
+            offer_2
         } = input_parent_ref.current;
 
         const data = {
@@ -80,22 +88,62 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
             inventory: Number(inventory.value),
             discount: Number(discount.value),
             source: source.value,
-            images: [image_1.value, image_2.value, image_3.value, image_4.value, image_5.value]
+            images: [image_1.value, image_2.value, image_3.value, image_4.value, image_5.value],
+            benifits: [benifit_1.value, benifit_2.value, benifit_3.value],
+            offers: [offer_1.value, offer_2.value]
+        }
+
+        for (const key in data) {
+
+            let value = data[key];
+
+            if (typeof value === 'object') {
+
+                for (let j = 0; j < value.length; j++) {
+                    if (!value[j]) {
+                        return null
+                    }
+                }
+
+            } else {
+
+                if (!value) {
+                    return null;
+                }
+            }
         }
 
         return data;
     }
 
-    const post_data = () => {
+    const post_data = async () => {
 
         const data = process_input_data();
 
-        console.log(data)
+        if (!data) {
+            toast.error('Fill all the fields');
+            return;
+        }
+
+        let response = await Axios.post('/products', data)
+
+        if (response.status === 200) {
+            load();
+            onClose();
+            toast.success('Product Added');
+        } else {
+            toast.error('Some error occured');
+        }
     }
 
     const update_data = async () => {
 
         const data = process_input_data();
+
+        if (!data) {
+            toast.error('Fill all the fields');
+            return;
+        }
 
         set_loading(true);
 
@@ -106,6 +154,9 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
         if (response.status === 200) {
             load();
             onClose();
+            toast.success('Updated Successfully');
+        } else {
+            toast.error('Some error occured');
         }
     }
 
@@ -171,7 +222,6 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
                                                 placeholder={'Price'}
                                                 borderRadius={12}
                                                 borderColor={'rgba(255,255,255, 0.2)'}
-                                                onChange={(event) => set_details((prev) => { return { ...prev, price: event.target.value } })}
                                             />
                                         </Box>
 
@@ -267,6 +317,55 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type }) => {
 
 
                                     </SimpleGrid>
+
+
+                                    <Text fontWeight={'medium'} mb={1} fontSize={22} pl={1} letterSpacing={1} mt={10} > Benifits </Text>
+
+                                    <SimpleGrid mt={2} columns={[1, 1, 2, 3]} gap={4} w={'100%'}>
+
+                                        {benifits.map((benifit, idx) => {
+                                            return (
+                                                <Box key={idx}>
+                                                    <Input
+                                                        name={`benifit_${idx + 1}`}
+                                                        defaultValue={benifit}
+                                                        tyep='url'
+                                                        h={12}
+                                                        placeholder={'Benifit'}
+                                                        borderRadius={12}
+                                                        borderColor={'rgba(255,255,255, 0.2)'}
+                                                    />
+                                                </Box>
+                                            )
+                                        })}
+
+
+                                    </SimpleGrid>
+
+
+                                    <Text fontWeight={'medium'} mb={1} fontSize={22} pl={1} letterSpacing={1} mt={10} > Offers </Text>
+
+                                    <SimpleGrid mt={2} columns={[1, 1, 2, 3]} gap={4} w={'100%'}>
+
+                                        {offers.map((offer, idx) => {
+                                            return (
+                                                <Box key={idx}>
+                                                    <Input
+                                                        name={`offer_${idx + 1}`}
+                                                        defaultValue={offer}
+                                                        tyep='url'
+                                                        h={12}
+                                                        placeholder={'Offer'}
+                                                        borderRadius={12}
+                                                        borderColor={'rgba(255,255,255, 0.2)'}
+                                                    />
+                                                </Box>
+                                            )
+                                        })}
+
+
+                                    </SimpleGrid>
+
                                 </Box>
 
                             </form>

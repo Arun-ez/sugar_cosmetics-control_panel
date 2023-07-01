@@ -4,6 +4,7 @@ import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { Sidebar } from '@/components/Sidebar';
 import { Login } from '@/components/Login';
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const App = ({ Component, pageProps }) => {
 
@@ -31,6 +32,12 @@ const App = ({ Component, pageProps }) => {
         }
 
       </ChakraProvider>
+
+      <Toaster
+        toastOptions={{
+          style: { backgroundColor: "#2D3748", color: "white", backdropFilter: "blur(20px)" }
+        }}
+      />
     </>
   )
 
