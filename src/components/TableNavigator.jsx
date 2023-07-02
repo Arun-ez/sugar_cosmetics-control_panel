@@ -7,7 +7,7 @@ import { Flex, Input, Select, Text, Button, useDisclosure } from '@chakra-ui/rea
 
 
 
-const TableNavigator = ({ page, set_page, total_pages, selections, selected, set_selected, query, set_query, items, search, load, token }) => {
+const TableNavigator = ({ page, set_page, total_pages, selections, selected, set_selected, query, set_query, items, load, token }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -45,8 +45,8 @@ const TableNavigator = ({ page, set_page, total_pages, selections, selected, set
                     onChange={(event) => { set_query(event.target.value) }}
                     onKeyDown={(event) => {
                         if (event.key === 'Enter') {
-                            set_page(1)
-                            search()
+                            set_page(1);
+                            load();
                         }
                     }}
                 />

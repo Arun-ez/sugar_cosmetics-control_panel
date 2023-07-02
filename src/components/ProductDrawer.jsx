@@ -181,7 +181,6 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type, token }) => {
                 <DrawerHeader>{type === 'update' ? title : 'Add New Product'}</DrawerHeader>
                 <DrawerBody >
                     <Flex direction={'column'} gap={10}>
-
                         {(type === 'update') && (
                             <SimpleGrid columns={5} gap={4} placeItems={'center'}>
                                 {images.map((src, idx) => {

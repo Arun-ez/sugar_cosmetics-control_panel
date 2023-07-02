@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Box, Heading, Table, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
+import { Flex, Box, Heading, Table, Thead, Tbody, Tr, Th, Spinner } from "@chakra-ui/react";
 import { TableNavigator } from "@/components/TableNavigator";
 import { ProductRow } from "@/components/ProductRow";
 import { Axios } from "@/configs/axios.config";
-import { toast } from "react-hot-toast";
 
 const home = ({ token }) => {
 
   const [products, set_products] = useState([]);
   const [total_items, set_total_items] = useState(0);
+  const [loading, set_loading] = useState(false);
 
   const [query, set_query] = useState('');
   const [selected, set_selected] = useState('');
@@ -38,9 +38,12 @@ const home = ({ token }) => {
     set_products(data);
     set_total_items(count);
     set_total_pages(total_pages);
+    set_loading(false);
   }
 
   const load = async () => {
+
+    set_loading(true);
 
     if (query) {
       search();
@@ -53,11 +56,10 @@ const home = ({ token }) => {
       set_products(data);
       set_total_items(count);
       set_total_pages(total_pages);
+      set_loading(false);
     } catch (error) {
-
+      set_loading(false);
     }
-
-
   }
 
   useEffect(() => {
@@ -83,34 +85,40 @@ const home = ({ token }) => {
         query={query}
         set_query={set_query}
         items={total_items}
-        search={search}
         load={load}
         token={token}
       />
 
-      <Table mt={5} variant={'simple'}>
-        <Thead>
-          <Tr>
-            <Th> Visibility </Th>
-            <Th> Title </Th>
-            <Th> Price </Th>
-            <Th> Category </Th>
-            <Th> Rating </Th>
-            <Th> Stock </Th>
-            <Th> Discount(%) </Th>
-            <Th> Source </Th>
-            <Th> View More </Th>
-          </Tr>
-        </Thead>
+      {!loading ? (
+        <Table mt={5} variant={'simple'}>
+          <Thead>
+            <Tr>
+              <Th> Visibility </Th>
+              <Th> Title </Th>
+              <Th> Price </Th>
+              <Th> Category </Th>
+              <Th> Rating </Th>
+              <Th> Stock </Th>
+              <Th> Discount(%) </Th>
+              <Th> Source </Th>
+              <Th> View More </Th>
+            </Tr>
+          </Thead>
 
-        <Tbody>
-          {products.map((product, idx) => {
-            return (
-              <ProductRow data={product} load={load} key={idx} token={token} />
-            )
-          })}
-        </Tbody>
-      </Table>
+          <Tbody>
+            {products.map((product, idx) => {
+              return (
+                <ProductRow data={product} load={load} key={idx} token={token} />
+              )
+            })}
+          </Tbody>
+
+        </Table>
+      ) : (
+        <Flex justifyContent={'center'} w={'100%'}>
+          <Spinner mt={140} size={'lg'} />
+        </Flex>
+      )}
 
     </Box>
   )
