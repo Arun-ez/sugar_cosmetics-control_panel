@@ -6,6 +6,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { Login } from '@/components/Login';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { Splash } from '@/components/Splash';
 import { Axios } from '@/configs/axios.config';
 
 const App = ({ Component, pageProps }) => {
@@ -13,6 +14,7 @@ const App = ({ Component, pageProps }) => {
   const [isAuth, setAuth] = useState(false);
   const [admin, setAdmin] = useState(null);
   const [token, setToken] = useState(null);
+  const [checking, set_checking] = useState(true);
 
   const onAuthSuccess = (name, token) => {
     setAuth(true);
@@ -30,9 +32,13 @@ const App = ({ Component, pageProps }) => {
   const checkAuthSession = async () => {
     const token = localStorage.getItem('sc_token');
 
-    if (!token) return;
+    if (!token) {
+      set_checking(false);
+      return;
+    }
 
     const { data } = await Axios.post(`/auth/login?token=${token}`);
+    set_checking(false);
     if (data.error) return;
     onAuthSuccess(data.name, token);
   }
@@ -51,16 +57,22 @@ const App = ({ Component, pageProps }) => {
 
       <ChakraProvider>
 
-        {isAuth ?
-          (
-            <Flex minH={'100vh'}>
-              <Sidebar admin={admin} onLogout={onLogout} />
-              <Component {...pageProps} token={token} />
-            </Flex>
-          ) : (
-            <Login onAuthSuccess={onAuthSuccess} />
-          )
-        }
+        {!checking ? (
+          isAuth ?
+            (
+              <Flex minH={'100vh'}>
+                <Sidebar admin={admin} onLogout={onLogout} />
+                <Component {...pageProps} token={token} />
+              </Flex>
+            ) : (
+              <Login onAuthSuccess={onAuthSuccess} />
+            )
+
+        ) : (
+          <Splash />
+        )}
+
+
 
       </ChakraProvider>
 

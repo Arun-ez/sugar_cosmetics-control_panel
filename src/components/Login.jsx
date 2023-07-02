@@ -11,7 +11,11 @@ const Login = ({ onAuthSuccess }) => {
 
     const login = async () => {
 
+        set_loading(true);
+
         const { data } = await Axios.post('/auth/login', { username, password })
+
+        set_loading(false);
 
         if (data.error) {
             toast.error('Invalid Credentials');
