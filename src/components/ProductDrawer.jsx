@@ -385,41 +385,41 @@ const ProductDrawer = ({ isOpen, onClose, data, load, type, token }) => {
                         </Box>
 
                     </Flex>
-
-                    <DrawerFooter justifyContent={'center'} >
-                        <HStack gap={4} mt={10} >
-
-                            {type === 'update' && (
-                                <Button w={200} bg={'gray.600'} color={'white'} _hover={'none'}>
-                                    <Link href={source} target='_blank'> Source </Link>
-                                </Button>
-                            )}
-
-                            {type === 'update' ? (
-                                <Button
-                                    isLoading={loading}
-                                    w={200} bg={'gray.600'}
-                                    color={'white'} _hover={'none'}
-                                    onClick={update_data}
-                                >
-                                    Update
-                                </Button>
-                            ) : (
-                                <Button
-                                    isLoading={loading}
-                                    w={200} bg={'gray.600'}
-                                    color={'white'} _hover={'none'}
-                                    onClick={post_data}
-                                >
-                                    Post
-                                </Button>
-                            )}
-
-
-                        </HStack>
-
-                    </DrawerFooter>
                 </DrawerBody>
+
+                <DrawerFooter justifyContent={'center'} >
+                    <HStack gap={4} mt={10} >
+
+                        {type === 'update' && (
+                            <Button w={[150, 200, 200, 200]} bg={'gray.600'} color={'white'} _hover={'none'}>
+                                <Link href={source} target='_blank'> Source </Link>
+                            </Button>
+                        )}
+
+                        {type === 'update' ? (
+                            <Button
+                                isLoading={loading}
+                                w={[150, 200, 200, 200]} bg={'gray.600'}
+                                color={'white'} _hover={'none'}
+                                onClick={update_data}
+                            >
+                                Update
+                            </Button>
+                        ) : (
+                            <Button
+                                isLoading={loading}
+                                w={[150, 200, 200, 200]} bg={'gray.600'}
+                                color={'white'} _hover={'none'}
+                                onClick={post_data}
+                            >
+                                Post
+                            </Button>
+                        )}
+
+
+                    </HStack>
+
+                </DrawerFooter>
             </DrawerContent>
         </Drawer>
     )

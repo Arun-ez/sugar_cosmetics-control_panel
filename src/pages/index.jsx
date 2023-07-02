@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { Flex, Box, Heading, Table, Thead, Tbody, Tr, Th, Spinner } from "@chakra-ui/react";
+import { Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Spinner, useDisclosure } from "@chakra-ui/react";
 import { TableNavigator } from "@/components/TableNavigator";
+import { ProductDrawer } from "@/components/ProductDrawer";
 import { ProductRow } from "@/components/ProductRow";
 import { Axios } from "@/configs/axios.config";
 
-const home = ({ token }) => {
+const products = ({ token }) => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [products, set_products] = useState([]);
   const [total_items, set_total_items] = useState(0);
@@ -86,8 +89,13 @@ const home = ({ token }) => {
         set_query={set_query}
         items={total_items}
         load={load}
-        token={token}
-      />
+        search_placeholder={'Search Products'}
+      >
+
+        <Button w={140} bg={'gray.600'} color={'white'} _hover={'none'} onClick={onOpen} > Add Product </Button>
+        <ProductDrawer isOpen={isOpen} onClose={onClose} load={load} type='post' token={token} />
+
+      </TableNavigator>
 
       {!loading ? (
         <Table mt={5} variant={'simple'}>
@@ -124,4 +132,4 @@ const home = ({ token }) => {
   )
 }
 
-export default home;
+export default products;
