@@ -13,7 +13,7 @@ const get = async (req, res) => {
         successful: [3]
     }
 
-    const status_criteria = { status: { $in: status_list[status] || status_criteria['active'] } };
+    const status_criteria = { status: { $in: status_list[status] || status_list['active'] } };
     const search_criteria = { $or: [{ email: q || '' }, { order_id: q || '' }] }
 
     const find = !q ? status_criteria : search_criteria;
