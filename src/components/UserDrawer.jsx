@@ -5,7 +5,6 @@ import {
     VStack,
     Drawer,
     DrawerBody,
-    DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
@@ -13,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 
-const UserDrawer = ({ isOpen, onClose, data, laod, token }) => {
+const UserDrawer = ({ isOpen, onClose, data }) => {
     return (
         <Drawer onClose={onClose} isOpen={isOpen} placement={'right'} size={'lg'} >
             <DrawerOverlay />

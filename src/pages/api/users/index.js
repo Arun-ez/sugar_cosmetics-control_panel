@@ -12,7 +12,7 @@ const get = async (req, res) => {
         let data = await User.find(email ? { email } : {}).limit(limit).skip(skip)
         const count = await User.find(email ? { email } : {}).count();
         const total_pages = limit ? Math.ceil(count / limit) : 1
-        return res.json({ data, page: page || 1, total_pages, count });
+        return res.json({ data, page: Number(page) || 1, total_pages, count });
     } catch (error) {
         return res.json({ error })
     }
