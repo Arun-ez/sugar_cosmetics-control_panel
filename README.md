@@ -2,10 +2,14 @@
 
 Through this Panel entire data of the main site such as Products, Orders, Inventory etc can be handled 
 
-## Sites
+## Live
 
-- <a href="https://sugar-cosmatics-control-panel.vercel.app/"> Control Panel </a>
-- <a href="https://sugar-cosmetics-clone-seven.vercel.app/"> Main Site </a>
+https://sugar-cosmatics-control-panel.vercel.app/
+
+## Related Repositories
+
+- <a href="https://github.com/Arun-ez/SUGAR_COSMETICS-clone"> Frontend </a>
+- <a href="https://github.com/Arun-ez/sugar_cosmetics_backend"> Backend </a>
 
 
 ## Tech Stack
