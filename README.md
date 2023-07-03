@@ -1,6 +1,6 @@
 # Control Panel - Sugar Cosmetics Clone
 
-Through this Panel entire data of main site such as Products, Orders, Inventory etc can be handled 
+Through this Panel entire data of the main site such as Products, Orders, Inventory etc can be handled 
 
 ## Sites
 
