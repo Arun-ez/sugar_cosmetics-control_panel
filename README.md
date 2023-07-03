@@ -1,12 +1,11 @@
 # Control Panel - Sugar Cosmetics Clone
 
-Through this the entire data such as Products, Orders, Inventory etc can be handled 
+Through this Panel entire data of main site such as Products, Orders, Inventory etc can be handled 
 
 ## Sites
 
 - <a href="https://sugar-cosmatics-control-panel.vercel.app/"> Control Panel </a>
 - <a href="https://sugar-cosmetics-clone-seven.vercel.app/"> Main Site </a>
-
 
 
 ## Tech Stack
