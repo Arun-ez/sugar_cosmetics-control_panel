@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Flex, Box, Heading, Table, Thead, Tbody, Tr, Th, Spinner } from "@chakra-ui/react";
 import { TableNavigator } from "@/components/TableNavigator";
 import { UserRow } from "@/components/UserRow";
+import { NoResults } from "@/components/NoResults";
 import { Axios } from "@/configs/axios.config";
 
 const users = ({ token }) => {
@@ -57,30 +58,36 @@ const users = ({ token }) => {
             />
 
             {!loading ? (
-                <Table mt={5} variant={'simple'} whiteSpace={'nowrap'}>
-                    <Thead>
-                        <Tr>
-                            <Th> Name </Th>
-                            <Th> Email </Th>
-                            <Th> Contact </Th>
-                            <Th> City </Th>
-                            <Th> Pincode </Th>
-                            <Th> Created On </Th>
-                            <Th> Cart Items </Th>
-                            <Th> View More </Th>
-                            <Th> Delete </Th>
-                        </Tr>
-                    </Thead>
 
-                    <Tbody>
-                        {users.map((user, idx) => {
-                            return (
-                                <UserRow data={user} load={load} key={idx} token={token} />
-                            )
-                        })}
-                    </Tbody>
+                users.length ? (
 
-                </Table>
+                    <Table mt={5} variant={'simple'} whiteSpace={'nowrap'}>
+                        <Thead>
+                            <Tr>
+                                <Th> Name </Th>
+                                <Th> Email </Th>
+                                <Th> Contact </Th>
+                                <Th> City </Th>
+                                <Th> Pincode </Th>
+                                <Th> Created On </Th>
+                                <Th> Cart Items </Th>
+                                <Th> View More </Th>
+                                <Th> Delete </Th>
+                            </Tr>
+                        </Thead>
+
+                        <Tbody>
+                            {users.map((user, idx) => {
+                                return (
+                                    <UserRow data={user} load={load} key={idx} token={token} />
+                                )
+                            })}
+                        </Tbody>
+
+                    </Table>
+                ) : (
+                    <NoResults />
+                )
             ) : (
                 <Flex justifyContent={'center'} w={'100%'}>
                     <Spinner mt={140} size={'lg'} />

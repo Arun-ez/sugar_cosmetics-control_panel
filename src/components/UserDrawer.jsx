@@ -13,6 +13,7 @@ import {
 
 
 const UserDrawer = ({ isOpen, onClose, data }) => {
+
     return (
         <Drawer onClose={onClose} isOpen={isOpen} placement={'right'} size={'lg'} >
             <DrawerOverlay />

@@ -11,8 +11,8 @@ const OrderRow = ({ data, load, token }) => {
     const { order_id, ordered_on, name, email, address, products, amount, status } = data;
 
     const status_list = [
-        { name: 'Confirmed', color: '#4299E1' },
-        { name: 'Shipped', color: '#9F7AEA' },
+        { name: 'Placed', color: '#4299E1' },
+        { name: 'Shipping', color: '#9F7AEA' },
         { name: 'In Transit', color: '#ECC94B' },
         { name: 'Delivered', color: '#68D391' }
     ]

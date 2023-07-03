@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Flex, Box, Heading, Table, Thead, Tbody, Tr, Th, Spinner } from "@chakra-ui/react";
 import { TableNavigator } from "@/components/TableNavigator";
 import { OrderRow } from "@/components/OrderRow";
+import { NoResults } from "@/components/NoResults";
 import { Axios } from "@/configs/axios.config";
 
 const orders = ({ token }) => {
@@ -66,31 +67,36 @@ const orders = ({ token }) => {
             />
 
             {!loading ? (
-                <Table mt={5} variant={'simple'} whiteSpace={'nowrap'}>
-                    <Thead>
-                        <Tr>
-                            <Th> Order ID </Th>
-                            <Th> Ordered On </Th>
-                            <Th> Name </Th>
-                            <Th> Email </Th>
-                            <Th> Contact </Th>
-                            <Th> Pincode </Th>
-                            <Th> No of Items </Th>
-                            <Th> Amount </Th>
-                            <Th> Status </Th>
-                            <Th> View More </Th>
-                        </Tr>
-                    </Thead>
 
-                    <Tbody>
-                        {orders.map((user, idx) => {
-                            return (
-                                <OrderRow data={user} load={load} key={idx} token={token} />
-                            )
-                        })}
-                    </Tbody>
+                orders.length ? (
+                    <Table mt={5} variant={'simple'} whiteSpace={'nowrap'}>
+                        <Thead>
+                            <Tr>
+                                <Th> Order ID </Th>
+                                <Th> Ordered On </Th>
+                                <Th> Name </Th>
+                                <Th> Email </Th>
+                                <Th> Contact </Th>
+                                <Th> Pincode </Th>
+                                <Th> No of Items </Th>
+                                <Th> Amount </Th>
+                                <Th> Status </Th>
+                                <Th> View More </Th>
+                            </Tr>
+                        </Thead>
 
-                </Table>
+                        <Tbody>
+                            {orders.map((user, idx) => {
+                                return (
+                                    <OrderRow data={user} load={load} key={idx} token={token} />
+                                )
+                            })}
+                        </Tbody>
+
+                    </Table>
+                ) : (
+                    <NoResults />
+                )
             ) : (
                 <Flex justifyContent={'center'} w={'100%'}>
                     <Spinner mt={140} size={'lg'} />

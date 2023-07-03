@@ -3,6 +3,8 @@ import { Flex, Box, Heading, Button, Table, Thead, Tbody, Tr, Th, Spinner, useDi
 import { TableNavigator } from "@/components/TableNavigator";
 import { ProductDrawer } from "@/components/ProductDrawer";
 import { ProductRow } from "@/components/ProductRow";
+import { NoResults } from "@/components/NoResults";
+
 import { Axios } from "@/configs/axios.config";
 
 const products = ({ token }) => {
@@ -98,30 +100,36 @@ const products = ({ token }) => {
       </TableNavigator>
 
       {!loading ? (
-        <Table mt={5} variant={'simple'}>
-          <Thead>
-            <Tr>
-              <Th> Visibility </Th>
-              <Th> Title </Th>
-              <Th> Price </Th>
-              <Th> Category </Th>
-              <Th> Rating </Th>
-              <Th> Stock </Th>
-              <Th> Discount(%) </Th>
-              <Th> Source </Th>
-              <Th> View More </Th>
-            </Tr>
-          </Thead>
 
-          <Tbody>
-            {products.map((product, idx) => {
-              return (
-                <ProductRow data={product} load={load} key={idx} token={token} />
-              )
-            })}
-          </Tbody>
+        products.length ? (
 
-        </Table>
+          <Table mt={5} variant={'simple'}>
+            <Thead>
+              <Tr>
+                <Th> Visibility </Th>
+                <Th> Title </Th>
+                <Th> Price </Th>
+                <Th> Category </Th>
+                <Th> Rating </Th>
+                <Th> Stock </Th>
+                <Th> Discount(%) </Th>
+                <Th> Source </Th>
+                <Th> View More </Th>
+              </Tr>
+            </Thead>
+
+            <Tbody>
+              {products.map((product, idx) => {
+                return (
+                  <ProductRow data={product} load={load} key={idx} token={token} />
+                )
+              })}
+            </Tbody>
+
+          </Table>
+        ) : (
+          <NoResults />
+        )
       ) : (
         <Flex justifyContent={'center'} w={'100%'}>
           <Spinner mt={140} size={'lg'} />
