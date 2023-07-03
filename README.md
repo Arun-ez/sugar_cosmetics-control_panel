@@ -10,7 +10,7 @@ Through this Panel entire data of the main site such as Products, Orders, Invent
 
 ## Tech Stack
 
-- HTML, CSS, NextJs 
+- NextJs, ChakraUi 
 
 
 ## Features
