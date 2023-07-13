@@ -110,6 +110,7 @@ const products = ({ token }) => {
                 <Th> Title </Th>
                 <Th> Price </Th>
                 <Th> Category </Th>
+                <Th> Filter By </Th>
                 <Th> Rating </Th>
                 <Th> Stock </Th>
                 <Th> Discount(%) </Th>

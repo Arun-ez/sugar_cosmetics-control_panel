@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 const ProductRow = ({ data, load, token }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { _id, title, price, category, rating, inventory, discount, source, visibility } = data;
+    const { _id, title, price, category, filter, rating, inventory, discount, source, visibility } = data;
 
     const [corrupted, set_corrupted] = useState(false);
 
@@ -41,6 +41,7 @@ const ProductRow = ({ data, load, token }) => {
             <Td w={600} minW={600} _after={corrupted && { content: '"fix"', backgroundColor: 'red', paddingLeft: 2, paddingRight: 2, borderRadius: '10px' }} > {title} </Td>
             <Td> ₹ {price} </Td>
             <Td> {category} </Td>
+            <Td> {filter} </Td>
             <Td textAlign={'center'}> {rating} </Td>
             <Td textAlign={'center'}> {inventory} </Td>
             <Td textAlign={'center'}> {discount}% </Td>
