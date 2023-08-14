@@ -4,7 +4,7 @@ Through this Panel entire data of the main site such as Products, Orders, Invent
 
 ## Live
 
-https://sugar-cosmatics-control-panel.vercel.app/
+https://sugarcosmaticscontrolpanel.vercel.app/
 
 ## Related Repositories
 
@@ -27,13 +27,13 @@ https://sugar-cosmatics-control-panel.vercel.app/
 - Persist Auth Sessions
 ## Snapshots
 
-![App Screenshot](https://sugar-cosmatics-control-panel.vercel.app/products.png)
+![App Screenshot](https://sugarcosmaticscontrolpanel.vercel.app/products.png)
 
-![App Screenshot](https://sugar-cosmatics-control-panel.vercel.app/orders.png)
+![App Screenshot](https://sugarcosmaticscontrolpanel.vercel.app/orders.png)
 
-![App Screenshot](https://sugar-cosmatics-control-panel.vercel.app/orders_view.png)
+![App Screenshot](https://sugarcosmaticscontrolpanel.vercel.app/orders_view.png)
 
-![App Screenshot](https://sugar-cosmatics-control-panel.vercel.app/users.png)
+![App Screenshot](https://sugarcosmaticscontrolpanel.vercel.app/users.png)
 
 
 ## Support
